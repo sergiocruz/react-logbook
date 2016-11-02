@@ -1,0 +1,75 @@
+.logbook * {
+  box-sizing: border-box;
+}
+
+.logbook__entrieslist {
+  border-left: 3px solid #ed1c40;
+  font-size: .7em;
+  margin: 0;
+  padding: 1em 0 1em 1em;
+  text-align: left;
+}
+
+.logbook__entrieslist > li ~ li {
+  margin-top: 2em;
+}
+
+.logbook__entrieslist li {
+  color: #696969;
+  line-height: 1.7em;
+  list-style: none;
+}
+
+.logbook__entrieslist li > a {
+  color: #696969;
+  text-decoration: none;
+}
+
+.logbook__entrieslist__year {
+  font-size: 1.8em;
+  font-weight: 100;
+}
+
+.logbook__entrieslist__entries {
+  margin: 0;
+  padding: 0;
+}
+
+.logbook__entrieslist__entries:last-child {
+  margin-bottom: 0;
+}
+
+.logbook__entry {}
+
+.logbook__entry__details {
+  background-color: #F5F5F5;
+  margin: 0;
+  overflow: hidden;
+  max-height: 0;
+  padding: 0 2em;
+  visibility: hidden;
+  transition: all 0.5s ease;
+}
+
+.logbook__entry__details--isShowing {
+  margin: .5em 0 2em;
+  max-height: 20em;
+  padding: .5em 2em;
+  visibility: visible;
+}
+
+.logbook__entry__btn {
+  background-color: #311B92;
+  border: none;
+  border-radius: .25em;
+  color: white;
+  font-size: 1em;
+  font-weight: 200;
+  margin: 0;
+  padding: .5em 1em;
+  text-decoration: none;
+}
+
+.logbook__entry__btn ~ .logbook__entry__btn {
+  margin-left: .7em;
+}
