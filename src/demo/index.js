@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import { Redirect, Router, Route, browserHistory } from 'react-router';
+import { Redirect, Router, Route, hashHistory } from 'react-router';
 
 // Components
 import InlineExample from './Inline';
@@ -11,7 +11,7 @@ import FirebaseExample from './Firebase';
 
 ReactDOM.render(
   (
-    <Router history={browserHistory}>
+    <Router history={hashHistory}>
       <Redirect from="/" to="/inline" />
       <Route path="/" component={App}>
         <Route path="inline" component={InlineExample} />

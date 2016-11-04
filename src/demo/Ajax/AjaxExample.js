@@ -19,7 +19,7 @@ export class AjaxExample extends Component {
   }
 
   componentWillMount() {
-    axios.get('/entries-example.json')
+    axios.get('entries-example.json')
       .then((response) => {
         // added a timeout so visitors can see the loading message
         // since ajax response might be too fast otherwise
