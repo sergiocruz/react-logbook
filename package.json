@@ -1,39 +1,49 @@
 {
   "name": "react-logbook",
-  "version": "0.1.0",
+  "version": "0.0.0-semantically-released",
   "description": "React component that helps you easily display a list of events.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sergiocruz/react-logbook.git"
-  },
-  "homepage": "https://sergiocruz.github.io/react-logbook",
   "main": "dist/index.js",
+  "homepage": "https://sergiocruz.github.io/react-logbook",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build:demo": "react-scripts build",
+    "prebuild:release": "rimraf dist",
+    "build:release": "npm-run-all --parallel build:release:*",
+    "build:release:commonjs": "NODE_ENV='production' babel --copy-files --out-dir dist --ignore *.test.js src/Logbook",
+    "build:release:browser": "NODE_ENV='production' webpack --config config/webpack.config.babel.js --output-filename browser/Logbook.min.js -p",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build:demo&&gh-pages -d build"
+  },
   "files": [
     "dist",
     "README.md"
   ],
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sergiocruz/react-logbook.git"
+  },
   "devDependencies": {
     "axios": "^0.15.2",
     "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.7",
     "firebase": "^3.5.3",
     "gh-pages": "^0.11.0",
+    "json-loader": "^0.5.4",
+    "npm-run-all": "^3.1.1",
     "react-dom": "^15.3.2",
     "react-highlight": "^0.9.0",
     "react-router": "^3.0.0",
-    "react-scripts": "0.7.0"
+    "react-scripts": "0.7.0",
+    "webpack": "^1.13.3"
   },
   "dependencies": {
     "moment": "^2.15.2",
     "radium": "^0.18.1",
     "react": "^15.3.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build:demo": "react-scripts build",
-    "build:release": "NODE_ENV='production' babel --copy-files --out-dir dist --ignore *.test.js src/Logbook",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "deploy": "npm run build:demo&&gh-pages -d build"
+  "babel": {
+    "presets": ["react-app"]
   }
 }
