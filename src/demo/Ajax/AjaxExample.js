@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/monokai-sublime.css';
-import { Logbook } from '../../Logbook';
+import Logbook from '../../Logbook';
 
 let sampleComponent;
 let timer;

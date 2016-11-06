@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Highlight from 'react-highlight';
 import 'highlight.js/styles/monokai-sublime.css';
-import { Logbook } from '../../Logbook';
+import Logbook from '../../Logbook';
 import { data } from '../../../public/entries-example.json';
 
 let sampleComponent = '';
