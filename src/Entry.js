@@ -1,12 +1,14 @@
 import React, { Component, PropTypes } from 'react';
-import { EntryDetails } from './EntryDetails';
+import Radium from 'radium';
 import moment from 'moment';
+import { EntryDetails } from './EntryDetails';
 
-export class Entry extends Component {
+class Entry extends Component {
 
   static propTypes = {
     entry: PropTypes.object.isRequired,
     isShowing: PropTypes.bool.isRequired,
+    styles: PropTypes.object.isRequired,
   }
 
   constructor() {
@@ -20,17 +22,26 @@ export class Entry extends Component {
   }
 
   render() {
-    const { entry } = this.props;
+    const { entry, styles } = this.props;
     const when = moment(entry.when);
     const month = when.format('MMM DD');
 
     return (
-      <li className="logbook__entry">
-        <a href="#" onClick={this.showEntry}>{month} - {entry.what}</a>
+      <li style={styles.li}>
+        <a href="#" style={styles.a} onClick={this.showEntry}>
+          {month} - {entry.what}
+        </a>
+
         <EntryDetails
           {...this.props} />
       </li>
     );
   }
 
+}
+
+const StyledComponent = Radium(Entry);
+
+export {
+  StyledComponent as Entry
 }
