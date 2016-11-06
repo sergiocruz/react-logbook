@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames';
+import Radium from 'radium';
 
-export class EntryDetails extends Component {
+class EntryDetails extends Component {
 
   static propTypes = {
     entry: PropTypes.object.isRequired,
@@ -9,20 +9,18 @@ export class EntryDetails extends Component {
   }
 
   render() {
-    const { entry, isShowing } = this.props;
-
-    const entryDetailsClass = classNames({
-      'logbook__entry__details': true,
-      'logbook__entry__details--isShowing': isShowing,
-    });
+    const { entry, isShowing, styles } = this.props;
 
     return (
-      <div className={entryDetailsClass}>
+      <div style={[
+        styles.entryDetails,
+        styles.entryDetails[isShowing ? 'isShowing' : ''],
+      ]}>
         <h3>{entry.what}</h3>
         <p>
           {!entry.link ? null :
             <a href={entry.link}
-              className="logbook__entry__btn"
+              style={styles.btn}
               target="_blank">
               Learn More
             </a>
@@ -30,7 +28,7 @@ export class EntryDetails extends Component {
 
           {!entry.video ? null :
             <a href={entry.video}
-              className="logbook__entry__btn"
+              style={[styles.btn, styles.btn.spaced]}
               target="_blank">
               Watch Video
             </a>
@@ -40,4 +38,10 @@ export class EntryDetails extends Component {
     );
   }
 
+}
+
+const StyledComponent = Radium(EntryDetails);
+
+export {
+  StyledComponent as EntryDetails
 }

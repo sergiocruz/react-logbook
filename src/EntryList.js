@@ -1,11 +1,15 @@
 import React, { Component, PropTypes } from 'react';
+import Radium from 'radium';
 import { Entry } from './Entry';
+import { getStyles } from './styles';
 import { formatEntries } from './lib/entry-formatter';
 
-export class EntryList extends Component {
+class EntryList extends Component {
 
   static propTypes = {
     entries: PropTypes.array.isRequired,
+    styleOptions: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired,
 
     // Allow multiple entries to be collapsed at the same time?
     showOneEntryOnly: PropTypes.bool.isRequired,
@@ -17,16 +21,37 @@ export class EntryList extends Component {
   static defaultProps = {
     showOneEntryOnly: true,
     sortAsc: false,
+    styles: {},
+    styleOptions: {
+      styleSideBarColor: '#ed1c40',
+    },
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       showedEntries: new Set()
     };
 
     this.onShowEntry = this.onShowEntry.bind(this);
+  }
+
+  componentWillMount() {
+    this.updateStyles(this.props);
+  }
+
+  componentWillReceiveProps(props) {
+    this.updateStyles(props);
+  }
+
+  updateStyles({ styles, styleOptions }) {
+    this.setState({
+      styles: {
+        ...getStyles(styleOptions),
+        ...styles,
+      }
+    });
   }
 
   onShowEntry(entry) {
@@ -45,21 +70,23 @@ export class EntryList extends Component {
 
   render() {
     const { entries, sortAsc } = this.props;
-    const { showedEntries } = this.state;
+    const { showedEntries, styles } = this.state;
     const formattedEntries = formatEntries(entries, sortAsc);
 
     return (
-      <ul className="logbook__entrieslist">
-        {formattedEntries.map(({year, entries = []}) =>
-          <li key={year}>
-            <span className="logbook__entrieslist__year">
-              {year}
-            </span>
-            <ul className="logbook__entrieslist__entries">
-              {entries.map((entry, index) =>
+      <ul style={styles.ul}>
+        {formattedEntries.map(({year, entries = []}, yearIndex) =>
+          <li key={year} style={[
+            styles.li,
+            styles.li[yearIndex > 0 ? 'spaced' : '']
+          ]}>
+            <span style={styles.year}>{year}</span>
+            <ul style={styles.entriesList}>
+              {entries.map((entry, entryIndex) =>
                 <Entry
-                  key={index}
+                  key={entryIndex}
                   entry={entry}
+                  styles={styles}
                   isShowing={showedEntries.has(entry)}
                   onShowEntry={this.onShowEntry} />
               )}
@@ -69,5 +96,10 @@ export class EntryList extends Component {
       </ul>
     );
   }
+}
 
+const StyledComponent = Radium(EntryList);
+
+export {
+  StyledComponent as EntryList
 }
