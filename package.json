@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
+    "lint": "eslint src",
     "build:demo": "react-scripts build",
-    "prebuild:release": "rimraf dist",
+    "prebuild:release": "rimraf dist && npm run lint",
     "build:release": "npm-run-all --parallel build:release:*",
     "build:release:commonjs": "NODE_ENV='production' babel --copy-files --out-dir dist/commonjs --ignore *.test.js src/Logbook",
     "build:release:browser": "NODE_ENV='production' webpack --config config/webpack.config.babel.js --output-filename browser/Logbook.min.js -p",
@@ -28,10 +29,17 @@
   "devDependencies": {
     "axios": "^0.15.2",
     "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.0",
     "babel-loader": "^6.2.7",
     "babel-preset-react-app": "^1.0.0",
     "commitizen": "^2.8.6",
     "cz-conventional-changelog": "^1.2.0",
+    "eslint": "^3.9.1",
+    "eslint-config-react-app": "^0.3.0",
+    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-import": "^2.1.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.6.0",
     "firebase": "^3.5.3",
     "gh-pages": "^0.11.0",
     "json-loader": "^0.5.4",
@@ -57,5 +65,8 @@
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
     }
+  },
+  "eslintConfig": {
+    "extends": "react-app"
   }
 }
