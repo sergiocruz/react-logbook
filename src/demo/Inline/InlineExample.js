@@ -25,7 +25,7 @@ export class InlineExample extends Component {
 
 sampleComponent = `
 import React, { Component } from 'react';
-import Lobook from 'react-logbook';
+import Logbook from 'react-logbook';
 
 let data = [{
   "id": "0b2d78c4",
