@@ -1,7 +1,7 @@
 {
   "name": "react-logbook",
   "description": "React component that helps you easily display a list of events.",
-  "main": "dist/index.js",
+  "main": "dist/commonjs/index.js",
   "homepage": "https://sergiocruz.github.io/react-logbook",
   "license": "MIT",
   "scripts": {
@@ -9,7 +9,7 @@
     "build:demo": "react-scripts build",
     "prebuild:release": "rimraf dist",
     "build:release": "npm-run-all --parallel build:release:*",
-    "build:release:commonjs": "NODE_ENV='production' babel --copy-files --out-dir dist --ignore *.test.js src/Logbook",
+    "build:release:commonjs": "NODE_ENV='production' babel --copy-files --out-dir dist/commonjs --ignore *.test.js src/Logbook",
     "build:release:browser": "NODE_ENV='production' webpack --config config/webpack.config.babel.js --output-filename browser/Logbook.min.js -p",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
