@@ -7,7 +7,7 @@ export default {
   output: {
     path: join(__dirname, '../dist'),
     libraryTarget: 'umd',
-    library: 'ReactLogbook',
+    library: 'Logbook',
   },
   devtool: 'source-map',
   externals: {
